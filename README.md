@@ -9,6 +9,11 @@ The way to build edison image is introduced in the following page:
 
 This script depends on vagrant so that it's possible for OSX to mount Yocto's ext4 image, which is required for building an image.
 
+## Prerequisites
+
+1. Docker 1.8.3+
+1. Vagrant 1.7.4+
+
 ## How to build
 
 You can build a docker image by the following command. The downloaded image version is [Release 2.1 Yocto complete image](https://software.intel.com/en-us/iot/hardware/edison/downloads) by default.
