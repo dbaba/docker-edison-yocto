@@ -34,3 +34,9 @@ bash-4.3#
 ```
 
 And you can explore Edison/Yocto container.
+
+## Revision History
+
+* 1.0.0
+  - Initial Release
+  - The default image is Release 2.1 poky-yocto
