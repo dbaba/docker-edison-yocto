@@ -19,21 +19,25 @@ This script depends on vagrant so that it's possible for OSX to mount Yocto's ex
 You can build a docker image by the following command. The downloaded image version is [Release 2.1 Yocto complete image](https://software.intel.com/en-us/iot/hardware/edison/downloads) by default.
 
 ```bash
-./build.sh
+$ git clone https://github.com/dbaba/docker-edison-yocto.git
+$ cd docker-edison-yocto
+$ ./build.sh
 ```
 => edison-yocto:2.1 will be created
 
 You can modify the URL to download by specifying `YOCTO_URL` and `TAG`.
 
 ```bash
-YOCTO_URL=http://downloadmirror.intel.com/24909/eng/edison-image-ww05-15.zip TAG=2.0 ./build.sh
+$ git clone https://github.com/dbaba/docker-edison-yocto.git
+$ cd docker-edison-yocto
+$ YOCTO_URL=http://downloadmirror.intel.com/24909/eng/edison-image-ww05-15.zip TAG=2.0 ./build.sh
 ```
 => edison-yocto:2.0 will be created
 
 ## How to run
 
 ```bash
-docker run -ti -v /absolute/path/to/your/host/workdir:/work --rm --name edison edison-yocto:2.1 bash
+$ docker run -ti -v /absolute/path/to/your/host/workdir:/work --rm --name edison edison-yocto:2.1 bash
 
 bash-4.3# 
 ```
