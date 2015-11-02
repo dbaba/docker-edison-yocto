@@ -83,11 +83,12 @@ function cook_yocto_rootfs {
   fi
 
   cp -f ${EXT4} ${FS_COOKER}/fs.img
-  cp -f auto_conf.sh ${FS_COOKER} 
+  cp -f ${AUTO_CONF_SCRIPT} ${FS_COOKER} 
   info "Starting vagrant..."
   pushd ${FS_COOKER}
   rm -f "${EXIT_FILE}"
   rm -f "${OUT_IMG_PATH}"
+  export AUTO_CONF_SCRIPT
   vagrant up > /dev/null 2>&1 &
   while true
   do
@@ -124,7 +125,8 @@ LOCAL_DIR="edison-yocto"
 LOCAL_ZIP="${LOCAL_DIR}.zip"
 FS_COOKER="vagrant-fs-cooker"
 OUT_IMG_PATH="${FS_COOKER}/fs.img.tar.gz"
-EXIT_FILE="auto_conf.sh.exit"
+AUTO_CONF_SCRIPT="${AUTO_CONF_SCRIPT:-vagrant_auto_conf.sh}"
+EXIT_FILE="${AUTO_CONF_SCRIPT}.exit"
 
 cd_project_root
 assert_preconditions_met
