@@ -37,6 +37,13 @@ function assert_preconditions_met {
       exit 2
     fi
   fi
+  
+  RET=`docker ps > /dev/null 2>&1`
+  RET=$?
+  if [ "${RET}" != "0" ]; then
+    err "Docker daemon is not up! Does 'docker ps' work?"
+    exit 3
+  fi
 }
 
 function prepare_fs_cooker {
