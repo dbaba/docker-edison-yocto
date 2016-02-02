@@ -88,7 +88,7 @@ function cook_yocto_rootfs {
   fi
 
   cp -f ${EXT4} ${FS_COOKER}/fs.img
-  cp -f ${AUTO_CONF_SCRIPT} ${FS_COOKER} 
+  cp -f ${AUTO_CONF_SCRIPT} ${FS_COOKER}
   info "Starting vagrant..."
   pushd ${FS_COOKER}
   rm -f "${EXIT_FILE}"
