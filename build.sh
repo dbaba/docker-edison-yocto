@@ -122,6 +122,8 @@ function build_docker_image {
 
 
 # main
+cd_project_root # Resolve ROOT
+
 LOCAL_DIR="edison-yocto"
 LOCAL_ZIP="${LOCAL_DIR}.zip"
 FS_COOKER="vagrant-fs-cooker"
@@ -129,7 +131,6 @@ OUT_IMG_PATH="${FS_COOKER}/fs.img.tar.gz"
 AUTO_CONF_SCRIPT="${AUTO_CONF_SCRIPT:-vagrant_auto_conf.sh}"
 EXIT_FILE="${AUTO_CONF_SCRIPT}.exit"
 
-cd_project_root
 assert_preconditions_met
 prepare_fs_cooker
 prepare_yocto_rootfs
