@@ -42,11 +42,11 @@ function assert_preconditions_met {
       exit 2
     fi
   fi
-  
-  RET=`docker ps > /dev/null 2>&1`
+
+  docker version > /dev/null
   RET=$?
   if [ "${RET}" != "0" ]; then
-    err "Docker daemon is not up! Does 'docker ps' work?"
+    err "Please start a docker-machine or perform docker-machine env"
     exit 3
   fi
 }
