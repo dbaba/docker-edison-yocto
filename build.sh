@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Release 2.1 Yocto complete image
+YOCTO_URL=${YOCTO_URL:-http://downloadmirror.intel.com/25384/eng/edison-iotdk-image-280915.zip}
+TAG=${TAG:-2.1}
+NAME="${NAME:-edison-yocto}"
+
 function err {
   echo -e "\033[91m[ERROR] $1\033[0m"
 }
@@ -117,10 +122,6 @@ function build_docker_image {
 
 
 # main
-# Release 2.1 Yocto complete image
-YOCTO_URL=${YOCTO_URL:-http://downloadmirror.intel.com/25384/eng/edison-iotdk-image-280915.zip}
-TAG=${TAG:-2.1}
-NAME="${NAME:-edison-yocto}"
 LOCAL_DIR="edison-yocto"
 LOCAL_ZIP="${LOCAL_DIR}.zip"
 FS_COOKER="vagrant-fs-cooker"
