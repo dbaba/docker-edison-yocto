@@ -11,8 +11,8 @@ This script depends on vagrant so that it's possible for OSX to mount Yocto's ex
 
 ## Prerequisites
 
-1. Docker 1.8.3+
-1. Vagrant 1.7.4+
+1. Docker 1.10.1+
+1. Vagrant 1.8.1+
 
 ## How to build
 
@@ -39,13 +39,14 @@ $ YOCTO_URL=http://downloadmirror.intel.com/24909/eng/edison-image-ww05-15.zip T
 ```bash
 $ docker run -ti -v /absolute/path/to/your/host/workdir:/work --rm --name edison edison-yocto:2.1 bash
 
-bash-4.3# 
+bash-4.3#
 ```
 
 And you can explore Edison/Yocto container.
 
 ## Revision History
-
+* 1.0.1
+  - Fix an issue where `build.sh` no longer worked on Docker 1.10.1
 * 1.0.0
   - Initial Release
   - The default image is Release 2.1 poky-yocto
