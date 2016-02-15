@@ -1,6 +1,9 @@
 docker-edison-yocto
 ===
 
+[![GitHub release](https://img.shields.io/github/release/dbaba/docker-edison-yocto.svg)](https://github.com/dbaba/docker-edison-yocto/releases/latest)
+[![License MIT](https://img.shields.io/github/license/dbaba/docker-edison-yocto.svg)](http://opensource.org/licenses/MIT)
+
 A docker image building script to create a poky-yocto edison image.
 
 The way to build edison image is introduced in the following page:
