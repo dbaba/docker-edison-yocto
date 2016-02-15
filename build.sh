@@ -113,7 +113,11 @@ function build_docker_image {
     exit 4
   fi
   docker rmi ${NAME}:${TAG} > /dev/null 2>&1
-  docker import "${OUT_IMG_PATH}" "${NAME}:${TAG}"
+  rm -fr ${ROOT}/fs.img
+  mkdir ${ROOT}/fs.img
+  tar zxf "${OUT_IMG_PATH}" -C fs.img
+  cd ${ROOT}/fs.img
+  tar -c . | docker import -"${NAME}":"${TAG}"
   RET=$?
   if [ "${RET}" == "0" ]; then
     info "Done! The docker image [${NAME}:${TAG}] has been created."
