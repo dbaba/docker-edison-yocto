@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Release 2.1 Yocto complete image
+YOCTO_URL=${YOCTO_URL:-http://downloadmirror.intel.com/25384/eng/edison-iotdk-image-280915.zip}
+TAG=${TAG:-2.1}
+NAME="${NAME:-edison-yocto}"
+
 function err {
   echo -e "\033[91m[ERROR] $1\033[0m"
 }
@@ -36,6 +41,13 @@ function assert_preconditions_met {
       err "TAG is required as well"
       exit 2
     fi
+  fi
+
+  docker version > /dev/null
+  RET=$?
+  if [ "${RET}" != "0" ]; then
+    err "Please start a docker-machine or perform docker-machine env"
+    exit 3
   fi
 }
 
@@ -76,11 +88,12 @@ function cook_yocto_rootfs {
   fi
 
   cp -f ${EXT4} ${FS_COOKER}/fs.img
-  cp -f auto_conf.sh ${FS_COOKER} 
+  cp -f ${AUTO_CONF_SCRIPT} ${FS_COOKER}
   info "Starting vagrant..."
   pushd ${FS_COOKER}
   rm -f "${EXIT_FILE}"
   rm -f "${OUT_IMG_PATH}"
+  export AUTO_CONF_SCRIPT
   vagrant up > /dev/null 2>&1 &
   while true
   do
@@ -100,7 +113,11 @@ function build_docker_image {
     exit 4
   fi
   docker rmi ${NAME}:${TAG} > /dev/null 2>&1
-  docker import "${OUT_IMG_PATH}" "${NAME}:${TAG}"
+  rm -fr ${ROOT}/fs.img
+  mkdir ${ROOT}/fs.img
+  tar zxf "${OUT_IMG_PATH}" -C fs.img
+  cd ${ROOT}/fs.img
+  tar -c . | docker import - "${NAME}":"${TAG}"
   RET=$?
   if [ "${RET}" == "0" ]; then
     info "Done! The docker image [${NAME}:${TAG}] has been created."
@@ -109,17 +126,15 @@ function build_docker_image {
 
 
 # main
-# Release 2.1 Yocto complete image
-YOCTO_URL=${YOCTO_URL:-http://downloadmirror.intel.com/25384/eng/edison-iotdk-image-280915.zip}
-TAG=${TAG:-2.1}
-NAME="${NAME:-edison-yocto}"
+cd_project_root # Resolve ROOT
+
 LOCAL_DIR="edison-yocto"
 LOCAL_ZIP="${LOCAL_DIR}.zip"
 FS_COOKER="vagrant-fs-cooker"
 OUT_IMG_PATH="${FS_COOKER}/fs.img.tar.gz"
-EXIT_FILE="auto_conf.sh.exit"
+AUTO_CONF_SCRIPT="${AUTO_CONF_SCRIPT:-vagrant_auto_conf.sh}"
+EXIT_FILE="${AUTO_CONF_SCRIPT}.exit"
 
-cd_project_root
 assert_preconditions_met
 prepare_fs_cooker
 prepare_yocto_rootfs
