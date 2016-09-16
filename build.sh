@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # Release 2.1 Yocto complete image
-YOCTO_URL=${YOCTO_URL:-http://downloadmirror.intel.com/25384/eng/edison-iotdk-image-280915.zip}
-TAG=${TAG:-2.1}
+YOCTO_URL=${YOCTO_URL:-https://software.intel.com/edison-image/latest}
+TAG=${TAG:-3.5}
 NAME="${NAME:-edison-yocto}"
+ROOT="."
 
 function err {
   echo -e "\033[91m[ERROR] $1\033[0m"
