@@ -14,15 +14,10 @@ function info {
 }
 
 function cd_project_root {
-  RET=`which realpath`
-  RET=$?
-  if [ "${RET}" == "0" ]; then
-    REALPATH=`realpath "$0"`
-  else
-    REALPATH=`readlink -f -- "$0"`
+  if [ ! -f "${ROOT}/vagrant_auto_conf.sh" ]; then
+    err "Please cd to docker-edison-yocto directory"
+    exit 1
   fi
-  ROOT=`dirname ${REALPATH}`
-  cd ${ROOT}
 }
 
 function assert_preconditions_met {
