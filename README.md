@@ -14,7 +14,7 @@ This script depends on vagrant so that it's possible for OSX to mount Yocto's ex
 
 ## Prerequisites
 
-1. Docker 1.10.1+
+1. Docker 1.12.1+
 1. Vagrant 1.8.1+
 
 ## How to build
