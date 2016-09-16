@@ -100,6 +100,8 @@ bash-4.3#
 And you can explore Edison/Yocto container.
 
 ## Revision History
+* 1.1.0
+  - Bump up Yocto version to 3.5
 * 1.0.1
   - Fix an issue where `build.sh` no longer worked on Docker 1.10.1
 * 1.0.0
