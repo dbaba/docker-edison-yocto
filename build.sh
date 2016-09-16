@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # Release 2.1 Yocto complete image
-YOCTO_URL=${YOCTO_URL:-http://downloadmirror.intel.com/25384/eng/edison-iotdk-image-280915.zip}
-TAG=${TAG:-2.1}
+YOCTO_URL=${YOCTO_URL:-https://software.intel.com/edison-image/latest}
+TAG=${TAG:-3.5}
 NAME="${NAME:-edison-yocto}"
+ROOT="."
 
 function err {
   echo -e "\033[91m[ERROR] $1\033[0m"
@@ -14,15 +15,10 @@ function info {
 }
 
 function cd_project_root {
-  RET=`which realpath`
-  RET=$?
-  if [ "${RET}" == "0" ]; then
-    REALPATH=`realpath "$0"`
-  else
-    REALPATH=`readlink -f -- "$0"`
+  if [ ! -f "${ROOT}/vagrant_auto_conf.sh" ]; then
+    err "Please cd to docker-edison-yocto directory"
+    exit 1
   fi
-  ROOT=`dirname ${REALPATH}`
-  cd ${ROOT}
 }
 
 function assert_preconditions_met {
